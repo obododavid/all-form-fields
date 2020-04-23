@@ -100,6 +100,9 @@ const Auth = () => {
       setPassword({ ...password, value })
     }
 
+    if (name === 'confirmPassword') {
+      setConfirmPassword({ ...confirmPassword, value })
+    }
 
     if (name === 'cardNumber') {
       const _value = value.match(/(\d{1,4})/g) || [];
@@ -169,6 +172,14 @@ const Auth = () => {
         setPassword({ ...password, hasError: true, errorMessage: 'Password must contain at least one uppercase character, one number, special character and not shorter than six characters' })
       } else {
         setPassword({ ...password, hasError: false, errorMessage: '' })
+      }
+    }
+
+    if (name === 'confirmPassword') {
+      if (value !== password.value) {
+        setConfirmPassword({ ...confirmPassword, hasError: true, errorMessage: 'Must match password field' })
+      } else {
+        setConfirmPassword({ ...confirmPassword, hasError: false, errorMessage: '' })
       }
     }
 
