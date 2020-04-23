@@ -4,6 +4,35 @@ import styled from 'styled-components';
 export const InputContainer = styled.div`
     position: relative;
 
+    .input-field{
+
+        border: 1px solid black;
+        padding: 12px 24px;
+        border-radius: 5px;
+        font-size: 16px;
+        outline: none;
+        transition: all 0.5s ease-in-out;
+    
+        ::placeholder{
+            opacity: 0.5;
+        }
+    
+        &:focus{
+            border-color: blue;
+        }
+    
+        &:focus + .input-label{
+            height: auto;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    }
+
+    .error{
+        border-color: #ff0000 !important;
+    }
+
     .input-label{
         position: absolute;
         left: 12px;
@@ -16,27 +45,11 @@ export const InputContainer = styled.div`
         transform: translateY(-8px);
         transition: all 0.5s ease-in-out;
     }
-`
 
-export const InputField = styled.input`
-    border: 1px solid black;
-    padding: 12px 24px;
-    border-radius: 5px;
-    font-size: 16px;
-    outline: none;
-    transition: all 0.5s ease-in-out;
 
-    ::placeholder{
-        opacity: 0.5;
-    }
-
-    &:focus{
-        border-color: blue;
-    }
-
-    &:focus + .input-label{
-        height: auto;
-        opacity: 1;
-        transform: translateY(0);
+    .error-message{
+        margin: 3px;
+        color: #ff0000;
+        font-weight: 400;
     }
 `
