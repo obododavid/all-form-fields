@@ -81,7 +81,11 @@ const Auth = () => {
 
 
     if (name === 'fullName') {
-      setFullName({ ...fullName, value: value })
+      setFullName({ ...fullName, value })
+    }
+
+    if (name === 'email') {
+      setEmail({ ...email, value })
     }
 
   }
@@ -94,11 +98,22 @@ const Auth = () => {
 
       if (value.length < 2) {
         setFullName({ ...fullName, hasError: true, errorMessage: 'Name must not be less than two characters' })
-      } else if (wordCount < 2 && value.length > 2) {
+      } else if (wordCount < 2 && value.length >= 2) {
         setFullName({ ...fullName, hasError: true, errorMessage: 'Name must include a space and then a second name' })
       } else {
         setFullName({ ...fullName, hasError: false, errorMessage: '' })
       }
+    }
+
+    if (name === 'email') {
+      const patt = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+      var isValid = patt.test(value);
+      if (!isValid) {
+        setEmail({ ...email, hasError: true, errorMessage: 'Please enter a valid email' })
+      } else {
+        setEmail({ ...email, hasError: false, errorMessage: '' })
+      }
+
     }
   }
 

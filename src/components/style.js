@@ -51,5 +51,19 @@ export const InputContainer = styled.div`
         margin: 3px;
         color: #ff0000;
         font-weight: 400;
+        display: flex;
+
+        span{
+            background-color: #ff0000;
+            color: #ffffff;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 5px;
+        }
     }
 `
