@@ -89,8 +89,8 @@ const Auth = () => {
     }
 
     if (name === 'phone') {
-      const allowOnlyNumbers = value.match(/\d/g) || [];
-      const joinNumbers = allowOnlyNumbers.join('')
+      const _value = value.match(/\d/g) || [];
+      const joinNumbers = _value.join("")
       if (value.length <= 11) {
         setPhone({ ...phone, value: joinNumbers })
       }
@@ -109,6 +109,14 @@ const Auth = () => {
       const formattedValue = _value.join("/");
       if (value.length <= 5) {
         setExpiryDate({ ...expiryDate, value: formattedValue });
+      }
+    }
+
+    if (name === 'pin') {
+      const _value = value.match(/\d/g) || [];
+      const formattedValue = _value.join("");
+      if (value.length <= 4) {
+        setPin({ ...pin, value: formattedValue });
       }
     }
 
@@ -166,6 +174,14 @@ const Auth = () => {
         setExpiryDate({ ...expiryDate, hasError: true, errorMessage: "enter a valid day" });
       } else {
         setExpiryDate({ ...expiryDate, hasError: false, errorMessage: "" });
+      }
+    }
+
+    if (name === 'pin') {
+      if (value.length !== 4) {
+        setPin({ ...pin, hasError: true, errorMessage: "card pin must be 4 digits" });
+      } else {
+        setPin({ ...pin, hasError: false, errorMessage: "" });
       }
     }
   }
