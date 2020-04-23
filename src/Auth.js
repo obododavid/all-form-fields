@@ -89,12 +89,18 @@ const Auth = () => {
     }
 
     if (name === 'phone') {
-
-      const allowNumbers = value.match(/\d/g) || [];
-      const joinNumbers = allowNumbers.join('')
-      console.log(value.length)
+      const allowOnlyNumbers = value.match(/\d/g) || [];
+      const joinNumbers = allowOnlyNumbers.join('')
       if (value.length <= 11) {
         setPhone({ ...phone, value: joinNumbers })
+      }
+    }
+
+    if (name === 'cardNumber') {
+      const _value = value.match(/(\d{1,4})/g) || [];
+      const formattedValue = _value.join(" ");
+      if (value.length <= 19) {
+        setCardNumber({ ...cardNumber, value: formattedValue });
       }
     }
 
@@ -134,6 +140,14 @@ const Auth = () => {
         setPhone({ ...phone, hasError: false, errorMessage: '' })
       }
     }
+
+    if (name === 'cardNumber') {
+      if (value.length !== 19) {
+        setCardNumber({ ...cardNumber, hasError: true, errorMessage: "Card Number must be 19 digits" });
+      } else {
+        setCardNumber({ ...cardNumber, hasError: false, errorMessage: "" });
+      }
+    }
   }
 
   const handleOnSubmit = (e) => {
@@ -148,7 +162,7 @@ const Auth = () => {
       <Input type='tel' name='phone' placeholder='phoneNumber' value={phone.value} hasError={phone.hasError} errorMessage={phone.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='password' name='password' placeholder='***' value={password.value} hasError={password.hasError} errorMessage={password.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='password' name='confirmPassword' placeholder='***' value={confirmPassword.value} hasError={confirmPassword.hasError} errorMessage={confirmPassword.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='text' name='cardNumber' placeholder='cardNumber' value={cardNumber.value} hasError={cardNumber.hasError} errorMessage={cardNumber.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      <Input type='text' name='cardNumber' placeholder='XXXX XXXX XXXX XXXX' value={cardNumber.value} hasError={cardNumber.hasError} errorMessage={cardNumber.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='text' name='expiryDate' placeholder='mm/yy' value={expiryDate.value} hasError={expiryDate.hasError} errorMessage={expiryDate.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='password' name='pin' placeholder='****' value={pin.value} hasError={pin.hasError} errorMessage={pin.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Button>Submit</Button>
