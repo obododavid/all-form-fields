@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from './components/Input';
 
 import styled from 'styled-components';
@@ -17,13 +17,21 @@ const AuthContainer = styled.form`
 `
 
 const Button = styled.button`
-border: none;
-background-color: blue;
-color: #ffffff;
-padding: 10px;
-outline: none;
-cursor: pointer;
+  border: none;
+  background-color: blue;
+  color: #ffffff;
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+
+  &:disabled{
+    opacity: 0.5;
+    cursor: not-allowed; 
+  }
 `
+
+const handleCheckEmailValidity = value => new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/).test(value);
+const handleCheckPasswordValidity = value => new RegExp(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/).test(value);
 
 
 const Auth = () => {
@@ -75,6 +83,8 @@ const Auth = () => {
     hasError: false,
     errorMessage: ''
   })
+
+  const [err, setErr] = useState(true)
 
   const handleOnChange = e => {
     const { name, value } = e.target;
@@ -146,8 +156,7 @@ const Auth = () => {
     }
 
     if (name === 'email') {
-      const pattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
-      var isValid = pattern.test(value);
+      var isValid = handleCheckEmailValidity(value)
       if (!isValid) {
         setEmail({ ...email, hasError: true, errorMessage: 'Please enter a valid email' })
       } else {
@@ -166,8 +175,7 @@ const Auth = () => {
     }
 
     if (name === 'password') {
-      const pattern = new RegExp(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/);
-      var isValid = pattern.test(value);
+      var isValid = handleCheckPasswordValidity(value)
       if (!isValid || value.length < 6) {
         setPassword({ ...password, hasError: true, errorMessage: 'Password must contain at least one uppercase character, one number, special character and not shorter than six characters' })
       } else {
@@ -217,6 +225,22 @@ const Auth = () => {
     console.log('hahaha')
   }
 
+  useEffect(() => {
+    if (fullName.value.length >= 5 &&
+      handleCheckEmailValidity(email.value) &&
+      phone.value.length === 11 &&
+      handleCheckPasswordValidity(password.value) &&
+      confirmPassword.value === password.value &&
+      cardNumber.value.length === 19 &&
+      expiryDate.value.length === 5 &&
+      pin.value.length === 4) {
+      setErr(false)
+    } else {
+      setErr(true)
+    }
+
+  }, [fullName, email, phone, password, confirmPassword, cardNumber, expiryDate, pin])
+
   return (
     <AuthContainer onSubmit={handleOnSubmit}>
       <Input type='text' name='fullName' placeholder='Full Name' value={fullName.value} hasError={fullName.hasError} errorMessage={fullName.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
@@ -227,7 +251,7 @@ const Auth = () => {
       <Input type='text' name='cardNumber' placeholder='XXXX XXXX XXXX XXXX' value={cardNumber.value} hasError={cardNumber.hasError} errorMessage={cardNumber.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='text' name='expiryDate' placeholder='mm/yy' value={expiryDate.value} hasError={expiryDate.hasError} errorMessage={expiryDate.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='password' name='pin' placeholder='****' value={pin.value} hasError={pin.hasError} errorMessage={pin.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Button>Submit</Button>
+      <Button disabled={err}>Submit</Button>
     </AuthContainer>
   )
 }
