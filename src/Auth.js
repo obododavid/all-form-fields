@@ -104,6 +104,14 @@ const Auth = () => {
       }
     }
 
+    if (name === 'expiryDate') {
+      const _value = value.match(/(\d{1,2})/g) || [];
+      const formattedValue = _value.join("/");
+      if (value.length <= 5) {
+        setExpiryDate({ ...expiryDate, value: formattedValue });
+      }
+    }
+
   }
 
   const handleValidateInput = e => {
@@ -146,6 +154,18 @@ const Auth = () => {
         setCardNumber({ ...cardNumber, hasError: true, errorMessage: "Card Number must be 19 digits" });
       } else {
         setCardNumber({ ...cardNumber, hasError: false, errorMessage: "" });
+      }
+    }
+
+    if (name === 'expiryDate') {
+      const day = value.slice(0, 2);
+
+      if (value.length !== 5) {
+        setExpiryDate({ ...expiryDate, hasError: true, errorMessage: "enter complete date" });
+      } else if (day < 1 || day > 31) {
+        setExpiryDate({ ...expiryDate, hasError: true, errorMessage: "enter a valid day" });
+      } else {
+        setExpiryDate({ ...expiryDate, hasError: false, errorMessage: "" });
       }
     }
   }
