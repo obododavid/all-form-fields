@@ -88,6 +88,16 @@ const Auth = () => {
       setEmail({ ...email, value })
     }
 
+    if (name === 'phone') {
+
+      const allowNumbers = value.match(/\d/g) || [];
+      const joinNumbers = allowNumbers.join('')
+      console.log(value.length)
+      if (value.length <= 11) {
+        setPhone({ ...phone, value: joinNumbers })
+      }
+    }
+
   }
 
   const handleValidateInput = e => {
@@ -113,7 +123,16 @@ const Auth = () => {
       } else {
         setEmail({ ...email, hasError: false, errorMessage: '' })
       }
+    }
 
+    if (name === 'phone') {
+      if (value.length !== 11) {
+        setPhone({ ...phone, hasError: true, errorMessage: 'Phone number must be 11 characters' })
+      } else if (value[0] !== '0') {
+        setPhone({ ...phone, hasError: true, errorMessage: 'Nigerian Phone number must begin with a zero' })
+      } else {
+        setPhone({ ...phone, hasError: false, errorMessage: '' })
+      }
     }
   }
 
