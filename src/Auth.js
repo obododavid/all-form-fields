@@ -96,6 +96,11 @@ const Auth = () => {
       }
     }
 
+    if (name === 'password') {
+      setPassword({ ...password, value })
+    }
+
+
     if (name === 'cardNumber') {
       const _value = value.match(/(\d{1,4})/g) || [];
       const formattedValue = _value.join(" ");
@@ -138,8 +143,8 @@ const Auth = () => {
     }
 
     if (name === 'email') {
-      const patt = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
-      var isValid = patt.test(value);
+      const pattern = new RegExp(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)
+      var isValid = pattern.test(value);
       if (!isValid) {
         setEmail({ ...email, hasError: true, errorMessage: 'Please enter a valid email' })
       } else {
@@ -154,6 +159,16 @@ const Auth = () => {
         setPhone({ ...phone, hasError: true, errorMessage: 'Nigerian Phone number must begin with a zero' })
       } else {
         setPhone({ ...phone, hasError: false, errorMessage: '' })
+      }
+    }
+
+    if (name === 'password') {
+      const pattern = new RegExp(/^(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/);
+      var isValid = pattern.test(value);
+      if (!isValid || value.length < 6) {
+        setPassword({ ...password, hasError: true, errorMessage: 'Password must contain at least one uppercase character, one number, special character and not shorter than six characters' })
+      } else {
+        setPassword({ ...password, hasError: false, errorMessage: '' })
       }
     }
 
