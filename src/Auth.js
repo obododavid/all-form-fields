@@ -222,7 +222,7 @@ const Auth = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log('hahaha')
+    alert('e dey work well well')
   }
 
   useEffect(() => {
@@ -245,12 +245,12 @@ const Auth = () => {
     <AuthContainer onSubmit={handleOnSubmit}>
       <Input type='text' name='fullName' placeholder='Full Name' value={fullName.value} hasError={fullName.hasError} errorMessage={fullName.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='email' name='email' placeholder='Email' value={email.value} hasError={email.hasError} errorMessage={email.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='tel' name='phone' placeholder='phoneNumber' value={phone.value} hasError={phone.hasError} errorMessage={phone.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='password' placeholder='***' value={password.value} hasError={password.hasError} errorMessage={password.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='confirmPassword' placeholder='***' value={confirmPassword.value} hasError={confirmPassword.hasError} errorMessage={confirmPassword.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      <Input type='tel' name='phone' placeholder='PhoneNumber' value={phone.value} hasError={phone.hasError} errorMessage={phone.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      <Input type='password' name='password' placeholder='Password' value={password.value} hasError={password.hasError} errorMessage={password.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      <Input type='password' name='confirmPassword' placeholder='Confirm Password' value={confirmPassword.value} hasError={confirmPassword.hasError} errorMessage={confirmPassword.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='text' name='cardNumber' placeholder='XXXX XXXX XXXX XXXX' value={cardNumber.value} hasError={cardNumber.hasError} errorMessage={cardNumber.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Input type='text' name='expiryDate' placeholder='mm/yy' value={expiryDate.value} hasError={expiryDate.hasError} errorMessage={expiryDate.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='pin' placeholder='****' value={pin.value} hasError={pin.hasError} errorMessage={pin.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      <Input type='password' name='pin' placeholder='pin' value={pin.value} hasError={pin.hasError} errorMessage={pin.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
       <Button disabled={err}>Submit</Button>
     </AuthContainer>
   )
