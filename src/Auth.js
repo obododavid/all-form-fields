@@ -241,16 +241,81 @@ const Auth = () => {
 
   }, [fullName, email, phone, password, confirmPassword, cardNumber, expiryDate, pin])
 
+  const input_fields = [
+    {
+      type: 'text',
+      name: 'fullName',
+      placeholder: 'Full Name',
+      title: 'Full Name',
+      state: fullName
+    },
+    {
+      type: 'email',
+      name: 'email',
+      placeholder: 'Email',
+      title: 'Email',
+      state: email
+    },
+    {
+      type: 'tel',
+      name: 'phone',
+      placeholder: 'Phone Number',
+      title: 'Phone Number',
+      state: phone
+    },
+    {
+      type: 'password',
+      name: 'password',
+      placeholder: 'Password',
+      title: 'Password',
+      state: password
+    },
+    {
+      type: 'password',
+      name: 'confirmPassword',
+      placeholder: 'Confirm Password',
+      title: 'Password',
+      state: confirmPassword
+    },
+    {
+      type: 'text',
+      name: 'cardNumber',
+      placeholder: 'XXXX XXXX XXXX XXXX',
+      title: 'Card Number',
+      state: cardNumber
+    },
+    {
+      type: 'text',
+      name: 'expiryDate',
+      placeholder: 'mm/yy',
+      title: 'Expiry Date',
+      state: expiryDate
+    },
+    {
+      type: 'password',
+      name: 'pin',
+      placeholder: 'pin',
+      title: 'Pin',
+      state: pin
+    },
+  ]
+
   return (
     <AuthContainer onSubmit={handleOnSubmit}>
-      <Input type='text' name='fullName' placeholder='Full Name' value={fullName.value} hasError={fullName.hasError} errorMessage={fullName.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='email' name='email' placeholder='Email' value={email.value} hasError={email.hasError} errorMessage={email.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='tel' name='phone' placeholder='PhoneNumber' value={phone.value} hasError={phone.hasError} errorMessage={phone.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='password' placeholder='Password' value={password.value} hasError={password.hasError} errorMessage={password.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='confirmPassword' placeholder='Confirm Password' value={confirmPassword.value} hasError={confirmPassword.hasError} errorMessage={confirmPassword.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='text' name='cardNumber' placeholder='XXXX XXXX XXXX XXXX' value={cardNumber.value} hasError={cardNumber.hasError} errorMessage={cardNumber.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='text' name='expiryDate' placeholder='mm/yy' value={expiryDate.value} hasError={expiryDate.hasError} errorMessage={expiryDate.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
-      <Input type='password' name='pin' placeholder='pin' value={pin.value} hasError={pin.hasError} errorMessage={pin.errorMessage} handleOnChange={handleOnChange} handleOnBlur={handleValidateInput} />
+      {input_fields.map((field, i) => {
+        const { type, name, placeholder, title, state } = field;
+        return <Input
+          key={i}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+          value={state.value}
+          hasError={state.hasError}
+          errorMessage={state.errorMessage}
+          handleOnChange={handleOnChange}
+          handleOnBlur={handleValidateInput} />
+      })}
+
       <Button disabled={err}>Submit</Button>
     </AuthContainer>
   )
