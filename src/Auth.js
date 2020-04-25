@@ -219,36 +219,31 @@ const Auth = () => {
   const handleValidateInput = e => {
     const { name, value } = e.target;
 
-    if (name === 'fullName') {
-      validateFullName(value)
-    }
-
-    if (name === 'email') {
-      validateEmail(value)
-    }
-
-    if (name === 'phone') {
-      validatePhoneNumber(value)
-    }
-
-    if (name === 'password') {
-      validatePassword(value)
-    }
-
-    if (name === 'confirmPassword') {
-      validateConfirmPassword(value)
-    }
-
-    if (name === 'cardNumber') {
-      validateCardNumber(value)
-    }
-
-    if (name === 'expiryDate') {
-      validateExpiryDate(value)
-    }
-
-    if (name === 'pin') {
-      validatePin(value)
+    switch (name) {
+      case "fullName":
+        validateFullName(value)
+        break;
+      case "email":
+        validateEmail(value)
+        break;
+      case "phone":
+        validatePhoneNumber(value)
+        break;
+      case "password":
+        validatePassword(value)
+        break;
+      case "confirmPassword":
+        validateConfirmPassword(value)
+        break;
+      case "cardNumber":
+        validateCardNumber(value)
+        break;
+      case "expiryDate":
+        validateExpiryDate(value)
+        break;
+      case "pin":
+        validatePin(value)
+        break;
     }
   }
 
