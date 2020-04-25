@@ -336,6 +336,7 @@ const Auth = () => {
           type={type}
           name={name}
           placeholder={placeholder}
+          title={title}
           value={state.value}
           hasError={state.hasError}
           errorMessage={state.errorMessage}

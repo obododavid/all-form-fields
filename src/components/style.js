@@ -22,15 +22,17 @@ export const InputContainer = styled.div`
         }
     
         &:focus + .input-label{
-            height: auto;
-            opacity: 1;
-            transform: translateY(0);
+            color: blue;
         }
 
     }
 
     .error{
         border-color: #ff0000 !important;
+    }
+
+    .error + .input-label{
+        color: #ff0000 !important;
     }
 
     .input-label{
@@ -40,11 +42,15 @@ export const InputContainer = styled.div`
         top: -11px;
         padding: 5px;
         background-color: #ffffff;
-        color: blue;
+        color: black;
         opacity: 0;
         transform: translateY(-8px);
         transition: all 0.5s ease-in-out;
+
+        ${({ focus }) => focus && 'opacity: 1; transform: translateY(0px);'}
     }
+
+   
 
 
     .error-message{
