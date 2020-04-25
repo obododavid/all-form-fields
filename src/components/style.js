@@ -37,17 +37,16 @@ export const InputContainer = styled.div`
 
     .input-label{
         position: absolute;
-        left: 12px;
+        top: -19px;
+        left: 3px;
         font-size: 12px;
-        top: -11px;
         padding: 5px;
+        padding-bottom: 0;
         background-color: #ffffff;
         color: black;
-        opacity: 0;
-        transform: translateY(-8px);
         transition: all 0.5s ease-in-out;
 
-        ${({ focus }) => focus && 'opacity: 1; transform: translateY(0px);'}
+        ${({ focus }) => focus && 'top: -11px; left: 12px;'}
     }
 
    
